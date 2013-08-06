@@ -11,6 +11,10 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Application\Model\Bench;
+use Application\Model\BenchTable;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
 
 class Module
 {
@@ -33,6 +37,25 @@ class Module
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                 ),
+            ),
+        );
+    }
+
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'Application\Model\BenchTable' =>  function($sm) {
+                    $tableGateway = $sm->get('BenchTableGateway');
+                    $table = new BenchTable($tableGateway);
+                    return $table;
+                },
+                'BenchTableGateway' => function ($sm) {
+                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Bench());
+                    return new TableGateway('bench', $dbAdapter, null, $resultSetPrototype);
+                },
             ),
         );
     }

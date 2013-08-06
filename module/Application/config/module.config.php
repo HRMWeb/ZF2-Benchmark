@@ -20,6 +20,26 @@ return array(
                     ),
                 ),
             ),
+            'bench/plain' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/bench/plain',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Bench',
+                        'action'     => 'plain',
+                    ),
+                ),
+            ),
+            'bench/model' => array(
+                'type' => 'Zend\Mvc\Router\Http\Literal',
+                'options' => array(
+                    'route'    => '/bench/model',
+                    'defaults' => array(
+                        'controller' => 'Application\Controller\Bench',
+                        'action'     => 'model',
+                    ),
+                ),
+            ),
             // The following is a route to simplify getting started creating
             // new controllers and actions without needing to create a new
             // module. Simply drop new controllers in, and you can access them
@@ -73,7 +93,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+            'Application\Controller\Bench' => 'Application\Controller\BenchController'
         ),
     ),
     'view_manager' => array(

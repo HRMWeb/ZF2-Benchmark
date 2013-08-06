@@ -1,0 +1,1 @@
+<h1>Plain benchmark, routing and view rendering</h1>
