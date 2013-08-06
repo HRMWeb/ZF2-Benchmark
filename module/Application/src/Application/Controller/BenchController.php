@@ -13,6 +13,7 @@ class BenchController extends AbstractActionController
     {
         $result = new ViewModel();
         $result->setTerminal(true);
+        error_log("Memory used by plain action: " . memory_get_peak_usage());
         return $result;
     }
 
@@ -31,6 +32,7 @@ class BenchController extends AbstractActionController
         }
         $result = new ViewModel();
         $result->setTerminal(true);
+        error_log("Memory used by model action: " . memory_get_peak_usage());
         return $result;     
     }
 
